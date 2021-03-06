@@ -5,7 +5,10 @@
     <title></title>
   </head>
   <body>
-    Hello from my Piggy Bank {{customer.name}}
-    My Account balance is {{customer.account.balance}}
+    <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
   </body>
 </html>

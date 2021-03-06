@@ -7,6 +7,9 @@ class Customer(models.Model):
     dob = models.CharField(max_length=20)
     phone = models.CharField(max_length=20)
 
+    def __str__(self):
+        return f"name: {self.name} , address: {self.address}"
+
 
 class Account(models.Model):
     accountId = models.AutoField(primary_key=True)

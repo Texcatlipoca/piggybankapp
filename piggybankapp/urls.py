@@ -1,7 +1,9 @@
 from django.contrib import admin
 from django.urls import path
-from . import views
+from .views import index, CustomerView
+
 
 urlpatterns = [
-    path('piggygreeting/', views.index, name="piggy_index"),
+    path('piggygreeting/', index, name="piggy_index"),
+    path('createform/', CustomerView.as_view()),
 ]
