@@ -1,11 +1,16 @@
 from django.shortcuts import render
-from .models import Customer
-from .forms import CustomerForm
+from .models import Customer, Profile
+from .forms import CustomerForm, ProfileForm
 from django.views.generic.edit import FormView
 
 def index(request):
     customer = Customer.objects.all().filter(name="Monchy").first()
     return render(request, 'index.html',{'customer': customer})
+
+def profIndex(request):
+    profile = Profile.objects.all().filter(username="Porky").first()
+    return render(request, 'profindex.html',{'profile: profile'})
+
 
 class CustomerView(FormView):
     template_name = 'index.html'
