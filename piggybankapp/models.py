@@ -19,13 +19,6 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20)
     #password = models.CharField(max_length=100)
 
-class Cat(models.Model):
-    profileId = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=50)
-    creationDate = models.DateTimeField(auto_now_add=True)
-    lastUpdate = models.DateTimeField(auto_now=True)
-    phone = models.CharField(max_length=20)
-
 
 class Account(models.Model):
     accountId = models.AutoField(primary_key=True)
