@@ -1,9 +1,9 @@
 from django.forms import ModelForm
-from .models import Customer, Account, Profile
+from .models import User, Account, Profile
 
-class CustomerForm(ModelForm):
+class UserForm(ModelForm):
     class Meta:
-        model = Customer
+        model = User
         fields = '__all__'
 
 class ProfileForm(ModelForm):

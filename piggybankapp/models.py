@@ -1,7 +1,7 @@
 from django.db import models
 
-class Customer(models.Model):
-    customerId = models.AutoField(primary_key=True)
+class User(models.Model):
+    userId = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     dob = models.IntegerField()
@@ -26,8 +26,8 @@ class Account(models.Model):
     balance = models.IntegerField()
     creationDate = models.DateTimeField(auto_now_add=True)
     lastUpdate = models.DateTimeField(auto_now=True)
-    customer = models.OneToOneField(
-      Customer,
+    user = models.OneToOneField(
+      User,
       on_delete=models.CASCADE
     )
 
