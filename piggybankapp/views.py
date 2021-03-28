@@ -9,7 +9,8 @@ def index(request):
 
 def profIndex(request):
     profile = Profile.objects.all().filter(username="Porky").first()
-    return render(request, 'profindex.html',{'profile: profile'})
+    return render(request, 'profindex.html',{'profile': profile})
+
 
 
 class UserView(FormView):
