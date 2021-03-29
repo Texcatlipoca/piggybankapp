@@ -60,7 +60,6 @@ class Profile(models.Model):
     creationDate = models.DateTimeField(auto_now_add=True)
     lastUpdate = models.DateTimeField(auto_now=True)
     phone = models.CharField(max_length=20)
-    #password = models.CharField(max_length=100)
 
 
 class Account(models.Model):
@@ -74,5 +73,25 @@ class Account(models.Model):
       on_delete=models.CASCADE
     )
 
+class BankAccount(models.Model):
+    bankId = models.AutoField(primary_key=True)
+    bankName = models.CharField(max_length=100)
+    linkedDate = models.DateTimeField(auto_now=True)
+    lastUpdate = models.DateTimeField(auto_now=True)
+    status = models.CharlField(max_length=100)
+    account = models.OneToOneField(
+      Account,
+      on_delete=models.CASCADE
+    )
 
-# add profile model
+
+class LoginDetails(models.Model):
+    loginId = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    creationDate = models.DateTimeField(auto_now_add=True)
+    lastUpdate = models.DateTimeField(auto_now=True)
+    user = models.OneToOneField(
+      User,
+      on_delete=models.CASCADE
+    )

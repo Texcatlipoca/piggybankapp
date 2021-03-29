@@ -28,3 +28,5 @@ class UserView(FormView):
         return super().form_valid(form)
 
     success_url ="/piggy/createform/"
+
+
