@@ -6,8 +6,9 @@
   </head>
   <body>
     <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
+<!---//    {% csrf_token %}
+//    {{ form.as_p }} -->
+      {{user.name}}
     <input type="submit" value="Save">
 </form>
   </body>

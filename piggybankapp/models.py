@@ -6,9 +6,11 @@ class User(models.Model):
     address = models.CharField(max_length=100)
     dob = models.IntegerField()
     phone = models.CharField(max_length=20)
+    test = models.CharField(max_length=100) #not sure
 
     def __str__(self):
         return f"name: {self.name} , address: {self.address}"
+
 
 class Pig(models.Model):
     pigId = models.AutoField(primary_key=True)
@@ -36,6 +38,7 @@ class Reminder(models.Model):
     date = models.DateTimeField()
     type = models.CharField(max_length=50)
     medium = models.CharField(max_length=20)
+    status = models.CharField(max_length=20)
 
     def __str__(self):
         return f"name: {self.name} , date: {self.date}, medium: {self.medium}"
@@ -73,6 +76,7 @@ class Account(models.Model):
       on_delete=models.CASCADE
     )
 
+<<<<<<< HEAD
 class BankAccount(models.Model):
     bankId = models.AutoField(primary_key=True)
     bankName = models.CharField(max_length=100)
@@ -95,3 +99,7 @@ class LoginDetails(models.Model):
       User,
       on_delete=models.CASCADE
     )
+=======
+class Peer(User):
+    relation = models.CharField(max_length=100) #not sure
+>>>>>>> 826fb7dd5574c3f610f1d162a3446de157d87e49

@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import User, Account, Profile
+from .models import User, Account, Profile, Reminder, Pig, Event, Goal
 
 class UserForm(ModelForm):
     class Meta:
@@ -14,4 +14,24 @@ class ProfileForm(ModelForm):
 class AccountForm(ModelForm):
     class Meta:
         model = Account
+        fields = '__all__'
+
+class ReminderForm(ModelForm):
+    class Meta:
+        model = Reminder
+        fields = '__all__'
+
+class Pigform(ModelForm):
+    class Meta:
+        model = Pig
+        fields = '__all__'
+
+class Eventform(ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+class Goalform(ModelForm):
+    class Meta:
+        model = Goal
         fields = '__all__'
