@@ -37,3 +37,10 @@ def userCollection(request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
+
+@api_view(['POST'])
+def createUser(request):
+    if request.method == 'POST':
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
