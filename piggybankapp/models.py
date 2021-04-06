@@ -1,7 +1,7 @@
 from django.db import models
 
 class User(models.Model):
-    userId = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     dob = models.IntegerField()
@@ -76,13 +76,12 @@ class Account(models.Model):
       on_delete=models.CASCADE
     )
 
-<<<<<<< HEAD
 class BankAccount(models.Model):
     bankId = models.AutoField(primary_key=True)
     bankName = models.CharField(max_length=100)
     linkedDate = models.DateTimeField(auto_now=True)
     lastUpdate = models.DateTimeField(auto_now=True)
-    status = models.CharlField(max_length=100)
+    status = models.CharField(max_length=100)
     account = models.OneToOneField(
       Account,
       on_delete=models.CASCADE
@@ -99,7 +98,3 @@ class LoginDetails(models.Model):
       User,
       on_delete=models.CASCADE
     )
-=======
-class Peer(User):
-    relation = models.CharField(max_length=100) #not sure
->>>>>>> 826fb7dd5574c3f610f1d162a3446de157d87e49
