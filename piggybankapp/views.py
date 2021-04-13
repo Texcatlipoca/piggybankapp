@@ -7,6 +7,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from piggybankapp.models import User
 from piggybankapp.serializers import UserSerializer
+from rest_framework.parsers import JSONParser
+from rest_framework import status
+from django.http.response import JsonResponse
+
 
 def index(request):
     user = User.objects.all().filter(name="Monchy").first()
@@ -40,7 +44,10 @@ def userCollection(request):
 
 @api_view(['POST'])
 def createUser(request):
-    if request.method == 'POST':
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+    user_data = JSONParser().parse(request)
+    serialized_user = UserSerializer(data=user_data)
+    if serialized_user.is_valid():
+        serialized_user.save()
+        return JsonResponse(serialized_user.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_user.data, status=status.HTTP_400_BAD_REQUEST)
+    
