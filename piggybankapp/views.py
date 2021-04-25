@@ -5,8 +5,8 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from piggybankapp.models import User
-from piggybankapp.serializers import UserSerializer
+from piggybankapp.models import User, Pig
+from piggybankapp.serializers import UserSerializer, PigSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.http.response import JsonResponse
@@ -51,3 +51,10 @@ def createUser(request):
         return JsonResponse(serialized_user.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serialized_user.data, status=status.HTTP_400_BAD_REQUEST)
     
+
+@api_view(['GET'])
+def pigCollection(request):
+    if request.method == 'GET':
+        pigs = Pig.objects.all()
+        serializer = PigSerializer(pigs, many=True)
+        return Response(serializer.data)
