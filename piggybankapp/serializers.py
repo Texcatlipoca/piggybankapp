@@ -6,7 +6,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'name', 'address', 'dob', 'phone')
+        fields = ('name', 'address', 'dob', 'phone')
 
 class PigSerializer(serializers.ModelSerializer):
 

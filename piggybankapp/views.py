@@ -58,3 +58,14 @@ def pigCollection(request):
         pigs = Pig.objects.all()
         serializer = PigSerializer(pigs, many=True)
         return Response(serializer.data)
+
+
+@api_view(['POST'])
+def createPig(request):
+    pig_data = JSONParser().parse(request)
+    serialized_pig = PigSerializer(data=pig_data)
+    if serialized_pig.is_valid():
+        serialized_pig.save()
+        return JsonResponse(serialized_pig.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_pig.data, status=status.HTTP_400_BAD_REQUEST)
+
