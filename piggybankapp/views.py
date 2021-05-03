@@ -5,13 +5,10 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-<<<<<<< HEAD
-from piggybankapp.models import User, Pig, Event
-from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer
-=======
-from piggybankapp.models import User, Pig, Reminder
-from piggybankapp.serializers import UserSerializer, PigSerializer, ReminderSerializer
->>>>>>> 7737f419c76e1984cae7fda7cc126b73034e8eac
+from piggybankapp.models import User, Pig, Event, Reminder
+from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer, ReminderSerializer
+
+
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.http.response import JsonResponse
