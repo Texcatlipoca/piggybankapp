@@ -5,8 +5,8 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from piggybankapp.models import User, Pig
-from piggybankapp.serializers import UserSerializer, PigSerializer
+from piggybankapp.models import User, Pig, Event
+from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.http.response import JsonResponse
@@ -68,4 +68,21 @@ def createPig(request):
         serialized_pig.save()
         return JsonResponse(serialized_pig.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serialized_pig.data, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def getEvents(request):
+    if request.method == 'GET':
+        events = Event.objects.all()
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
+
+
+@api_view(['POST'])
+def createEvent(request):
+    event_data = JSONParser().parse(request)
+    deserialized_event = EventSerializer(data=event_data)
+    if deserialized_event.is_valid():
+        deserialized_event.save()
+        return JsonResponse(deserialized_event.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(deserialized_event.data, status=status.HTTP_400_BAD_REQUEST)
 
