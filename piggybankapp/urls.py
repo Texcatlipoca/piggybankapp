@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from piggybankapp.views import index, profIndex, UserView, userCollection,createUser, pigCollection, createPig
+from piggybankapp.views import index, profIndex, UserView, userCollection, createUser, pigCollection, createPig, reminderCollection, createReminder
 
 
 urlpatterns = [
@@ -10,6 +10,8 @@ urlpatterns = [
     path('api/v1/users/', userCollection, name="user_collection"),
     path('api/v1/createuser/', createUser, name="create_user"),
     path('api/v1/pigs/', pigCollection, name="pig_collection"),
-    path('api/v1/createpig/', createPig, name="create_pig")
+    path('api/v1/createpig/', createPig, name="create_pig"),
+    path('api/v1/reminders/', reminderCollection, name='reminder_collection'),
+    path('api/v1/createreminder/', createReminder, name='create_reminder')
  
 ]
