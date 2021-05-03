@@ -36,7 +36,7 @@ class Reminder(models.Model):
     reminderId = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     date = models.DateTimeField()
-    type = models.CharField(max_length=50)
+    reminderType = models.CharField(max_length=50)
     medium = models.CharField(max_length=20)
     status = models.CharField(max_length=20)
 

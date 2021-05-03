@@ -5,8 +5,13 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+<<<<<<< HEAD
 from piggybankapp.models import User, Pig, Event
 from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer
+=======
+from piggybankapp.models import User, Pig, Reminder
+from piggybankapp.serializers import UserSerializer, PigSerializer, ReminderSerializer
+>>>>>>> 7737f419c76e1984cae7fda7cc126b73034e8eac
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.http.response import JsonResponse
@@ -69,6 +74,7 @@ def createPig(request):
         return JsonResponse(serialized_pig.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serialized_pig.data, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def getEvents(request):
     if request.method == 'GET':
@@ -86,3 +92,20 @@ def createEvent(request):
         return JsonResponse(deserialized_event.data, status=status.HTTP_201_CREATED)
     return JsonResponse(deserialized_event.data, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['GET'])
+def reminderCollection(request):
+    if request.method == 'GET':
+        reminders = Reminder.objects.all()
+        serializer = ReminderSerializer(reminders, many=True)
+        return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def createReminder(request):
+    reminder_data = JSONParser().parse(request)
+    serialized_reminder = ReminderSerializer(data=reminder_data)
+    if serialized_reminder.is_valid():
+        serialized_reminder.save()
+        return JsonResponse(serialized_reminder.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_reminder.data, status=status.HTTP_400_BAD_REQUEST)
