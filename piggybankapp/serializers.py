@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from piggybankapp.models import User, Pig, Event, Reminder
+from piggybankapp.models import Goal, User, Pig, Event, Reminder, Goal, Profile
 
 
 
@@ -23,5 +23,18 @@ class EventSerializer(serializers.ModelSerializer):
 class ReminderSerializer(serializers.ModelSerializer):
 
     class Meta:
-        mdoel = Reminder
+        model = Reminder
         fields = ('name', 'date', 'reminderType', 'medium', 'status')
+
+class GoalSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Goal
+        fields = ('name', 'status', 'startingBalance', 'endingBalance', 'currentBalance')
+
+class ProfileSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Profile
+        fields = ('username', 'creationDate', 'lastUpdate', 'phone')
+

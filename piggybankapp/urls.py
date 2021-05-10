@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from piggybankapp.views import index, profIndex, UserView, userCollection
-from piggybankapp.views import createUser, pigCollection, createPig, getEvents, createEvent, reminderCollection, createReminder
+from piggybankapp.views import createUser, pigCollection, createPig, getEvents, createEvent, reminderCollection, createReminder, goalCollection, createGoal, profileCollection, createProfile
 
 
 urlpatterns = [
@@ -16,7 +16,10 @@ urlpatterns = [
     path('api/v1/events', getEvents, name="get_events_view"),
     path('api/v1/createEvent', createEvent, name="create_event_view"),
     path('api/v1/reminders/', reminderCollection, name='reminder_collection'),
-    path('api/v1/createreminder/', createReminder, name='create_reminder')
-
+    path('api/v1/createreminder/', createReminder, name='create_reminder'),
+    path('api/v1/goals/', goalCollection, name='goal_collection'),
+    path('api/v1/creategoal/', createGoal, name='create_goal'),
+    path('api/v1/profiles/', profileCollection, name='profile_collection'),
+    path('api/v1/createprofile/', createProfile, name='create_profile')
  
 ]

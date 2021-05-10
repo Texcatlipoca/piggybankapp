@@ -5,8 +5,8 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from piggybankapp.models import User, Pig, Event, Reminder
-from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer, ReminderSerializer
+from piggybankapp.models import User, Pig, Event, Reminder, Goal, Profile
+from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer, ReminderSerializer, GoalSerializer, ProfileSerializer
 
 
 from rest_framework.parsers import JSONParser
@@ -106,3 +106,43 @@ def createReminder(request):
         serialized_reminder.save()
         return JsonResponse(serialized_reminder.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serialized_reminder.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def goalCollection(request):
+    if request.method == 'GET':
+        goals = Goal.objects.all()
+        serializer = GoalSerializer(goals, many=True)
+        return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def createGoal(request):
+    goal_data = JSONParser().parse(request)
+    serialized_goal = GoalSerializer(data=goal_data)
+    if serialized_goal.is_valid():
+        serialized_goal.save()
+        return JsonResponse(serialized_goal.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_goal.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def profileCollection(request):
+    if request.method == 'GET':
+        profiles = Profile.objects.all()
+        serializer = ProfileSerializer(profiles, many=True)
+        return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def createProfile(request):
+    profile_data = JSONParser().parse(request)
+    serialized_profile = ProfileSerializer(data=profile_data)
+    if serialized_profile.is_valid():
+        serialized_profile.save()
+        return JsonResponse(serialized_profile.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_profile.data, status=status.HTTP_400_BAD_REQUEST)
