@@ -171,14 +171,14 @@ def createBankAccount(request):
 @api_view(['GET'])
 def loginDetailsCollection(request):
     if request.method == 'GET':
-        loginDetails = Profile.objects.all()
-        serializer = ProfileSerializer(loginDetails, many=True)
+        loginDetails = LoginDetails.objects.all()
+        serializer = LoginDetailsSerializer(loginDetails, many=True)
         return Response(serializer.data)
 
 @api_view(['POST'])
 def createLoginDetails(request):
     login_details_data = JSONParser().parse(request)
-    serialized_login_details = ProfileSerializer(data=login_details_data)
+    serialized_login_details = LoginDetailsSerializer(data=login_details_data)
     if serialized_login_details.is_valid():
         serialized_login_details.save()
         return JsonResponse(serialized_login_details.data, status=status.HTTP_201_CREATED)

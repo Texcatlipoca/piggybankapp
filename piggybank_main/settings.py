@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.mysql',
          'NAME': 'piggy_data',
-         'USER': 'piggyappuser',
-         'PASSWORD': 'Piggy@pp123',
+         'USER': 'root',
+         'PASSWORD': '24thWard',
          'HOST': 'localhost',   
          'PORT': '3306',
      }
