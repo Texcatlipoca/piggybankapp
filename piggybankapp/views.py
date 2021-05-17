@@ -8,7 +8,6 @@ from rest_framework.response import Response
 from piggybankapp.models import User, Pig, Event, Reminder, Goal, Profile, BankAccount, LoginDetails
 from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer, ReminderSerializer, GoalSerializer, ProfileSerializer, BankAccountSerializer, LoginDetailsSerializer
 
-
 from rest_framework.parsers import JSONParser
 from rest_framework import status
 from django.http.response import JsonResponse
@@ -176,8 +175,6 @@ def loginDetailsCollection(request):
         serializer = ProfileSerializer(loginDetails, many=True)
         return Response(serializer.data)
 
-
-
 @api_view(['POST'])
 def createLoginDetails(request):
     login_details_data = JSONParser().parse(request)
@@ -186,3 +183,20 @@ def createLoginDetails(request):
         serialized_login_details.save()
         return JsonResponse(serialized_login_details.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serialized_login_details.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def getLoginDetails(request):
+    if request.method == 'GET':
+        details = LoginDetails.objects.all()
+        serializer = LoginDetailsSerializer(details, many=True)
+        return Response(serializer.data)
+
+@api_view(['POST'])
+def newLoginDetails(request):
+    login_details = JSONParser().parse(request)
+    serialized_login = LoginDetailsSerializer(data=login_details)
+    if serialized_login.is_valid():
+        serialized_login.save()
+        return JsonResponse(serialized_login.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_login.data, status=status.HTTP_400_BAD_REQUEST)

@@ -2,7 +2,6 @@ from rest_framework import serializers
 from piggybankapp.models import Goal, User, Pig, Event, Reminder, Goal, Profile, BankAccount, LoginDetails
 
 
-
 class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -38,16 +37,14 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ('username', 'creationDate', 'lastUpdate', 'phone')
 
-
 class BankAccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BankAccount
         fields = ('bankName', 'linkedDate', 'lastUpdate', 'status')
 
-
 class LoginDetailsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = LoginDetails
-        fields = ('username', 'password', 'creationDate', 'lastUpdate')
+        fields = ('username', 'password', 'creationDate', 'lastUpdate', 'user')

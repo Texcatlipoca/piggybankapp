@@ -83,13 +83,13 @@ DATABASES = {
     # }
 
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'piggy_data',
-        'USER': 'root',
-        'PASSWORD': '24thWard',
-        'HOST': 'localhost',   
-        'PORT': '3306',
-    }
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'piggy_data',
+         'USER': 'piggyappuser',
+         'PASSWORD': 'Piggy@pp123',
+         'HOST': 'localhost',   
+         'PORT': '3306',
+     }
 }
 
 
