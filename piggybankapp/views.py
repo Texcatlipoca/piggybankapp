@@ -5,8 +5,8 @@ from django.views.generic.edit import FormView
 from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from piggybankapp.models import User, Pig, Event, Reminder, Goal, Profile
-from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer, ReminderSerializer, GoalSerializer, ProfileSerializer
+from piggybankapp.models import User, Pig, Event, Reminder, Goal, Profile, BankAccount, LoginDetails
+from piggybankapp.serializers import UserSerializer, PigSerializer, EventSerializer, ReminderSerializer, GoalSerializer, ProfileSerializer, BankAccountSerializer, LoginDetailsSerializer
 
 
 from rest_framework.parsers import JSONParser
@@ -146,3 +146,43 @@ def createProfile(request):
         serialized_profile.save()
         return JsonResponse(serialized_profile.data, status=status.HTTP_201_CREATED)
     return JsonResponse(serialized_profile.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def bankAccountCollection(request):
+    if request.method == 'GET':
+        banks = BankAccount.objects.all()
+        serializer = BankAccountSerializer(banks, many=True)
+        return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def createBankAccount(request):
+    bank_account_data = JSONParser().parse(request)
+    serialized_bank_account = BankAccountSerializer(data=bank_account_data)
+    if serialized_bank_account.is_valid():
+        serialized_bank_account.save()
+        return JsonResponse(serialized_bank_account.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_bank_account.data, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+@api_view(['GET'])
+def loginDetailsCollection(request):
+    if request.method == 'GET':
+        loginDetails = Profile.objects.all()
+        serializer = ProfileSerializer(loginDetails, many=True)
+        return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+def createLoginDetails(request):
+    login_details_data = JSONParser().parse(request)
+    serialized_login_details = ProfileSerializer(data=login_details_data)
+    if serialized_login_details.is_valid():
+        serialized_login_details.save()
+        return JsonResponse(serialized_login_details.data, status=status.HTTP_201_CREATED)
+    return JsonResponse(serialized_login_details.data, status=status.HTTP_400_BAD_REQUEST)
